@@ -14,14 +14,36 @@ namespace NNPredictingRougthness
         private double depth;
         private double Ga;
         private double Ra;
+        public List<Double> inputList;
 
         public Surface(double spd, double fd, double dpt, double ga, double ra)
         {
-            speed = spd / 1000;
+            speed = spd;
             feed = fd;
-            depth = dpt / 5;
-            Ga = ga / 50;
+            depth = dpt;
+            Ga = ga;
             Ra = ra;
+            inputList = GetInputs();
+        }
+
+        private List<Double> GetInputs()
+        {
+            List<Double> inputList = new List<double>();
+            inputList.Add(speed);
+            inputList.Add(feed);
+            inputList.Add(depth);
+            inputList.Add(Ga);
+            return inputList;
+        }
+
+        public List<Double> GetScaleInputs()
+        {
+            List<Double> inputList = new List<double>();
+            inputList.Add(SurfaceList.scaleSpeed(speed));
+            inputList.Add(SurfaceList.scaleFeed(feed));
+            inputList.Add(SurfaceList.scaleDepth(depth));
+            inputList.Add(SurfaceList.scaleGa(Ga));
+            return inputList;
         }
 
         public double getSpeed()
@@ -47,6 +69,11 @@ namespace NNPredictingRougthness
         public double getRa()
         {
             return Ra;
+        }
+
+        public double getScaledRa()
+        {
+            return SurfaceList.scaleRa(Ra);
         }
 
         public void Display(StreamWriter SW)
