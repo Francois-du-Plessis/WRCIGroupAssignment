@@ -8,12 +8,12 @@ namespace NNPredictingRougthness
 {
     class Program
     {
-        static SurfaceList surfaceList;
+        static GreyImageList greyImageList;
         static NeuralNetwork NN;
         static void Main(string[] args)
         {
-            //GreyImageList gIL = new GreyImageList(); //Runs onceoff to populate .txt containing Surface Image information
-            surfaceList = new SurfaceList();
+            greyImageList = new GreyImageList(); //Runs onceoff to populate .txt containing Surface Image information
+            //surfaceList = new SurfaceList();
             NN = new NeuralNetwork();
             RunFourParameterTest();
             Console.ReadLine();
@@ -23,47 +23,50 @@ namespace NNPredictingRougthness
         {
             
             int counter = 0;
-            while (counter < 500000)
+            while (counter < 1000)
             {
                 counter++;
 
                 double totalSSE = 0;
                 double totalEvalSSE = 0;
 
-                foreach (Surface surface in surfaceList.getOptiData())
+                foreach (GreyImage greyImage in greyImageList.GetTestGreyImages())
                 {
-                    List<double> predictedRougthness = NN.Predict(surface);
+                    Surface surface = greyImage.surface;
+                    List<double> predictedRougthness = NN.Predict(greyImage);
                     List<double> actualRougthness = new List<double>();
                     actualRougthness.Add(surface.getScaledRa());
                     NN.TrainNeuron(0.1, actualRougthness);
                     totalSSE = Math.Pow(predictedRougthness[0] - surface.getScaledRa(), 2);
                 }
 
-                foreach (Surface surface in surfaceList.getEvalData())
+                foreach (GreyImage greyImage in greyImageList.GetEvalGreyImages())
                 {
-                    List<double> predictedRougthness = NN.Predict(surface);
+                    Surface surface = greyImage.surface;
+                    List<double> predictedRougthness = NN.Predict(greyImage);
                     List<double> actualRougthness = new List<double>();
                     actualRougthness.Add(surface.getScaledRa());
-                    NN.TrainNeuron(0.1, actualRougthness);
                     totalEvalSSE = Math.Pow(predictedRougthness[0] - surface.getScaledRa(), 2);
                 }
 
-                if(counter%100 == 0)
+                if(counter%1 == 0)
                 {
                     Console.WriteLine("{0} | TestSSE: {1} | EvalSSE: {2}",counter,totalSSE,totalEvalSSE);
                 }
             }
 
-            foreach (Surface surface in surfaceList.getOptiData())
+            foreach (GreyImage greyImage in greyImageList.GetTestGreyImages())
             {
-                List<double> predictedRougthness = NN.Predict(surface);
-                Console.WriteLine("Actual RA: {0} | PredictedRA: {1} | Difference: {2}", surface.getRa(), SurfaceList.descaleRa(predictedRougthness[0]), surface.getRa()- SurfaceList.descaleRa(predictedRougthness[0]));
+                Surface surface = greyImage.surface;
+                List<double> predictedRougthness = NN.Predict(greyImage);
+                Console.WriteLine("Actual RA: {0} | PredictedRA: {1} | Difference: {2}", surface.getRa(), GreyImageList.descaleRa(predictedRougthness[0]), surface.getRa()- GreyImageList.descaleRa(predictedRougthness[0]));
             }
 
-            foreach (Surface surface in surfaceList.getEvalData())
+            foreach (GreyImage greyImage in greyImageList.GetEvalGreyImages())
             {
-                List<double> predictedRougthness = NN.Predict(surface);
-                Console.WriteLine("Actual RA: {0} | PredictedRA: {1} | Difference: {2}", surface.getRa(), SurfaceList.descaleRa(predictedRougthness[0]), surface.getRa() - SurfaceList.descaleRa(predictedRougthness[0]));
+                Surface surface = greyImage.surface;
+                List<double> predictedRougthness = NN.Predict(greyImage);
+                Console.WriteLine("Actual RA: {0} | PredictedRA: {1} | Difference: {2}", surface.getRa(), GreyImageList.descaleRa(predictedRougthness[0]), surface.getRa() - GreyImageList.descaleRa(predictedRougthness[0]));
 
             }
         }

@@ -9,7 +9,7 @@ namespace NNPredictingRougthness
     class NeuralNetwork
     {
         private readonly int J = 5; //Number of neurons in hidden layer
-        private readonly int I = 4; //Number of inputs
+        private readonly int I = 4 + 10000; //Number of inputs
         private readonly int K = 1; //Number of neurons in output layer
 
         private List<Double> InputN;
@@ -107,11 +107,12 @@ namespace NNPredictingRougthness
             return (random.NextDouble() * (2.0 / Math.Sqrt(I + 1)) - (1.0 / Math.Sqrt(I + 1)));
         }
 
-        public List<Double> Predict(Surface patterns)
+        public List<Double> Predict(GreyImage image)
         {
             InputN = new List<Double>();
 
-            InputN.AddRange(patterns.GetScaleInputs());
+            InputN.AddRange(image.surface.GetScaleInputs());
+            InputN.AddRange(image.scaledPixelArray);
 
             CalculateHiddenLayer();
             CalculateOutputLayer();

@@ -39,10 +39,10 @@ namespace NNPredictingRougthness
         public List<Double> GetScaleInputs()
         {
             List<Double> inputList = new List<double>();
-            inputList.Add(SurfaceList.scaleSpeed(speed));
-            inputList.Add(SurfaceList.scaleFeed(feed));
-            inputList.Add(SurfaceList.scaleDepth(depth));
-            inputList.Add(SurfaceList.scaleGa(Ga));
+            inputList.Add(GreyImageList.scaleSpeed(speed));
+            inputList.Add(GreyImageList.scaleFeed(feed));
+            inputList.Add(GreyImageList.scaleDepth(depth));
+            inputList.Add(GreyImageList.scaleGa(Ga));
             return inputList;
         }
 
