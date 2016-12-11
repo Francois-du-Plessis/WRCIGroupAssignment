@@ -82,13 +82,18 @@ namespace NNPredictingRougthness
                 NN = new NeuralNetwork((int)parameters[0],parameters[2]);
                 RunFourParameterTest(parameters[1]);
             }
+
+            greyImageList = new GreyImageList(); 
+            //surfaceList = new SurfaceList();
+            NN = new NeuralNetwork();
+            RunFourParameterTest();
             Console.ReadLine();
         }
 
         static void RunFourParameterTest(double learningRate = 0.1)
         {
             int counter = 0;
-            while (counter < 1000)
+            while (counter < 200)
             {
                 counter++;
 
@@ -102,7 +107,7 @@ namespace NNPredictingRougthness
                     List<double> actualRougthness = new List<double>();
                     actualRougthness.Add(surface.getScaledRa());
                     NN.TrainNeuron(learningRate, actualRougthness);
-                    totalSSE = Math.Pow(predictedRougthness[0] - surface.getScaledRa(), 2);
+                    totalSSE = Math.Pow(GreyImageList.descaleRa(predictedRougthness[0]) - surface.getRa(), 2);
                 }
 
                 foreach (GreyImage greyImage in greyImageList.GetEvalGreyImages())
@@ -111,7 +116,7 @@ namespace NNPredictingRougthness
                     List<double> predictedRougthness = NN.Predict(greyImage);
                     List<double> actualRougthness = new List<double>();
                     actualRougthness.Add(surface.getScaledRa());
-                    totalEvalSSE = Math.Pow(predictedRougthness[0] - surface.getScaledRa(), 2);
+                    totalEvalSSE = Math.Pow(GreyImageList.descaleRa(predictedRougthness[0]) - surface.getRa(), 2);
                 }
 
                 if(counter%1 == 0)
