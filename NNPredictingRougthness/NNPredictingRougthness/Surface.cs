@@ -73,7 +73,7 @@ namespace NNPredictingRougthness
 
         public double getScaledRa()
         {
-            return SurfaceList.scaleRa(Ra);
+            return GreyImageList.scaleRa(Ra);
         }
 
         public void Display(StreamWriter SW)

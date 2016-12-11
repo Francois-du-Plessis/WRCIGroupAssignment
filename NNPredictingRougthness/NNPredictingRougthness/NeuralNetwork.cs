@@ -207,13 +207,13 @@ namespace NNPredictingRougthness
                 for (int i = 0; i < I + 1; i++)
                 {
                     V[j,i] += (dV[j,i] + momentumConstant * prevdV[j,i]);
-                    if (dV[j,i] * prevdV[j,i] == Math.Abs(dV[j,i] * prevdV[j,i]))
-                    {
-                        LearningConstantsV[j,i] += 0.00001;
-                    }
-                    else {
-                        LearningConstantsV[j,i] -= 0.00001;
-                    }
+                    //if (dV[j,i] * prevdV[j,i] == Math.Abs(dV[j,i] * prevdV[j,i]))
+                    //{
+                    //    LearningConstantsV[j,i] += 0.00001;
+                    //}
+                    //else {
+                    //    LearningConstantsV[j,i] -= 0.00001;
+                    //}
                     prevdV[j,i] = dV[j,i];
                     dV[j,i] = 0;
                 }
@@ -224,13 +224,13 @@ namespace NNPredictingRougthness
                 for (int j = 0; j < J + 1; j++)
                 {
                     W[k,j] += (dW[k,j] + momentumConstant * prevdW[k,j]);
-                    if (dW[k,j] * prevdW[k,j] == Math.Abs(dW[k,j] * prevdW[k,j]))
-                    {
-                        LearningConstatnsW[k,j] += 0.000001;
-                    }
-                    else {
-                        LearningConstatnsW[k,j] -= 0.000001;
-                    }
+                    //if (dW[k,j] * prevdW[k,j] == Math.Abs(dW[k,j] * prevdW[k,j]))
+                    //{
+                    //    LearningConstatnsW[k,j] += 0.000001;
+                    //}
+                    //else {
+                    //    LearningConstatnsW[k,j] -= 0.000001;
+                    //}
                     prevdW[k,j] = dW[k,j];
                     dW[k,j] = 0;
                 }
