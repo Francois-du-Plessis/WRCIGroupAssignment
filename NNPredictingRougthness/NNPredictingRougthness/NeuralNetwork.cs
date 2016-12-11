@@ -8,7 +8,7 @@ namespace NNPredictingRougthness
 {
     class NeuralNetwork
     {
-        private readonly int J = 5; //Number of neurons in hidden layer
+        private int J = 5; //Number of neurons in hidden layer
         private readonly int I = 4 + 10000; //Number of inputs
         private readonly int K = 1; //Number of neurons in output layer
 
@@ -32,8 +32,11 @@ namespace NNPredictingRougthness
 
         private Random random = new Random();
 
-        public NeuralNetwork()
+        public NeuralNetwork(int neuronsInHiddenLayer = -1, double momentum = -1)
         {
+            if (neuronsInHiddenLayer != -1) J = neuronsInHiddenLayer;
+            if (momentum != -1) momentumConstant = momentum;
+
             V = new double[J,I + 1];
             W = new double[K,J + 1];
 
@@ -235,6 +238,16 @@ namespace NNPredictingRougthness
                     dW[k,j] = 0;
                 }
             }
+        }
+
+        public int getHiddenLayerSize()
+        {
+            return J;
+        }
+
+        public double getMomentumConstant()
+        {
+            return momentumConstant;
         }
     }
 }

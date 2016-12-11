@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace NNPredictingRougthness
 {
@@ -92,7 +93,7 @@ namespace NNPredictingRougthness
         private Surface GetSurfaceFromFileName(string fileName)
         {
             string[] VFDRa = fileName.Split('_');
-            Surface newSurface = new Surface(double.Parse(VFDRa[0]), double.Parse(VFDRa[1]), double.Parse(VFDRa[2]), System.Convert.ToDouble(Ga), double.Parse(VFDRa[3]));
+            Surface newSurface = new Surface(double.Parse(VFDRa[0], NumberStyles.Any, CultureInfo.InvariantCulture), double.Parse(VFDRa[1], NumberStyles.Any, CultureInfo.InvariantCulture), double.Parse(VFDRa[2], NumberStyles.Any, CultureInfo.InvariantCulture), System.Convert.ToDouble(Ga), double.Parse(VFDRa[3], NumberStyles.Any, CultureInfo.InvariantCulture)); //the NumberStyles.Any and CultureInfo parameters allow the double to parse numbers with dots in them (aka "4.1") on PCs that usually use a comma (aka "4,1")
             if (newSurface.getSpeed() > maxSpeed)
             {
                 maxSpeed = newSurface.getSpeed();
