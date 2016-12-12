@@ -10,7 +10,7 @@ namespace GAPredictingRougthness
     {
         static GreyImageList greyImageList;
         static GeneticAlgo GA;
-
+        static int MaxNumberOfGenerations = 100000; //Parameter used to determine when the algorithm should stop.
         static void Main(string[] args)
         {
             greyImageList = new GreyImageList();
@@ -45,7 +45,7 @@ namespace GAPredictingRougthness
                     Console.WriteLine(counter + " | Current Fittest: " + GA.population[0].GetFitness());
                 }
                 counter++;
-            } while (counter < 100000);
+            } while (counter < MaxNumberOfGenerations);
 
 
                 foreach (GreyImage greyImage in greyImageList.GetTestGreyImages())

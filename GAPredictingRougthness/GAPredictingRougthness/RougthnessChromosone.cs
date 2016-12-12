@@ -11,10 +11,11 @@ namespace GAPredictingRougthness
         List<Double> coeffs;
         private double NumberOfGenes = 9;
         public double fitness = double.MaxValue;
-        public static double mutationMagnitude = 1;
-        public static double mutationChancePerValue = 1;
-        public double mutateChance = 0.9;
-        public double crossoverRate = 0.9;
+        public static double mutationMagnitude = 1; //Parameter Maximum value that a mutation will decrease or increase
+        public static double mutationChancePerValue = 1; //Parameter Chance that a gene in a chromosome will mutate [0;1].
+        public static double EquationNumber = 0; //Parameter 0 uses the equation "a + b*speed + c*feed + d*depth + e*Ga" and 1 uses the equation "a + b*speed^f + c*feed^g + d*depth^h + e*Ga^i"
+        public double mutateChance = 0.9; //Parameter Chance that a chromosome will be mutated [0;1].
+        public double crossoverRate = 0.9; //Parameter Chance that a chromosome will be crossovered [0;1].
 
         public RougthnessChromosone()
         {
@@ -103,8 +104,14 @@ namespace GAPredictingRougthness
         public double CalculateRougthness(GreyImage gI)
         {
             Surface curSurface = gI.surface;
-            //return coeffs[0] + (coeffs[1] * curSurface.getSpeed()) + (coeffs[2] * curSurface.getFeed()) + (coeffs[3] * curSurface.getDepth()) + (coeffs[4] * curSurface.getGa());
-            return coeffs[0] + coeffs[1] * Math.Pow( curSurface.getSpeed(), coeffs[5]) + coeffs[2] * Math.Pow( curSurface.getFeed(), coeffs[6]) + coeffs[3] * Math.Pow( curSurface.getDepth(), coeffs[7]) + coeffs[4] * Math.Pow( curSurface.getGa(), coeffs[8]);
+            if (EquationNumber == 1)
+            {
+                return coeffs[0] + coeffs[1] * Math.Pow(curSurface.getSpeed(), coeffs[5]) + coeffs[2] * Math.Pow(curSurface.getFeed(), coeffs[6]) + coeffs[3] * Math.Pow(curSurface.getDepth(), coeffs[7]) + coeffs[4] * Math.Pow(curSurface.getGa(), coeffs[8]);
+            }
+            else
+            {
+                return coeffs[0] + (coeffs[1] * curSurface.getSpeed()) + (coeffs[2] * curSurface.getFeed()) + (coeffs[3] * curSurface.getDepth()) + (coeffs[4] * curSurface.getGa());
+            }
         }
 
         public RougthnessChromosone Clone()
