@@ -21,7 +21,7 @@ namespace NNPredictingRougthness
 
             List<double[]> TrainingParameters = new List<double[]>();
 
-            //TrainingParameters.Add(new double[] { 5, 0.1, 0.0001 });//original: hidden neurons, learning rate, momentum
+            TrainingParameters.Add(new double[] { 5, 0.1, 0.0001 });//original: hidden neurons, learning rate, momentum
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.001 });
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.01 });
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.00001 });
@@ -67,13 +67,15 @@ namespace NNPredictingRougthness
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.001 });
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.01 });
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.00001 });
-            TrainingParameters.Add(new double[] { 10, 0.1, 0.000001 });
+            //TrainingParameters.Add(new double[] { 10, 0.1, 0.000001 });
 
             //TrainingParameters.Add(new double[] { 15, 0.1, 0.0001 });
             //TrainingParameters.Add(new double[] { 15, 0.1, 0.001 });
             //TrainingParameters.Add(new double[] { 15, 0.1, 0.01 });
             //TrainingParameters.Add(new double[] { 15, 0.1, 0.00001 });
             //TrainingParameters.Add(new double[] { 15, 0.1, 0.000001 });
+
+            //TrainingParameters.Add(new double[] { 15, 0.1, 0.0001 }); //hypothesized best setting, based on graphs
 
             foreach (double[] parameters in TrainingParameters)
             {
@@ -83,17 +85,17 @@ namespace NNPredictingRougthness
                 RunFourParameterTest(parameters[1]);
             }
 
-            greyImageList = new GreyImageList(); 
-            //surfaceList = new SurfaceList();
-            NN = new NeuralNetwork();
-            RunFourParameterTest();
+            //greyImageList = new GreyImageList(); 
+            ////surfaceList = new SurfaceList();
+            //NN = new NeuralNetwork();
+            //RunFourParameterTest();
             Console.ReadLine();
         }
 
         static void RunFourParameterTest(double learningRate = 0.1)
         {
             int counter = 0;
-            while (counter < 200)
+            while (counter < 800)
             {
                 counter++;
 
