@@ -11,7 +11,7 @@ namespace GAPredictingRougthness
         public List<RougthnessChromosone> population;
 
         public int populationSize = 100; //Parameter Population Size
-        public static int TOURNAMENT_SIZE = 10; //Parameter Tournament Size
+        public static int TOURNAMENT_SIZE = 20; //Parameter Tournament Size
 
         public static Random random = new Random();
 
