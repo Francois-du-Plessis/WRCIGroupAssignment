@@ -21,7 +21,7 @@ namespace NNPredictingRougthness
 
             List<double[]> TrainingParameters = new List<double[]>();
 
-            TrainingParameters.Add(new double[] { 5, 0.1, 0.0001 });//original: hidden neurons, learning rate, momentum
+            //TrainingParameters.Add(new double[] { 5, 0.1, 0.0001 });//original: hidden neurons, learning rate, momentum
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.001 });
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.01 });
             //TrainingParameters.Add(new double[] { 5, 0.1, 0.00001 });
@@ -63,7 +63,7 @@ namespace NNPredictingRougthness
             //TrainingParameters.Add(new double[] { 15, 0.001, 0.00001 });
             //TrainingParameters.Add(new double[] { 15, 0.001, 0.000001 });
 
-            //TrainingParameters.Add(new double[] { 10, 0.1, 0.0001 });
+            TrainingParameters.Add(new double[] { 10, 0.1, 0.0001 });
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.001 });
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.01 });
             //TrainingParameters.Add(new double[] { 10, 0.1, 0.00001 });
